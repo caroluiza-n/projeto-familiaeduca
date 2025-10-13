@@ -4,7 +4,6 @@ import com.projeto.familiaeduca.application.exceptions.response.ApiResponse;
 import com.projeto.familiaeduca.application.requests.*;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.application.services.UsuarioService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -42,41 +41,5 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/diretor")
-    public ResponseEntity<UsuarioResponse> createDiretor(@RequestBody CreateDiretorRequest request) {
-        UsuarioResponse usuario = usuarioService.createDiretor(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
-    }
-
-    @PutMapping("/diretor/{id}")
-    public ResponseEntity<UsuarioResponse> updateDiretor(@PathVariable UUID id, @RequestBody UpdateDiretorRequest request) {
-        UsuarioResponse usuario = usuarioService.updateDiretor(id, request);
-        return ResponseEntity.ok(usuario);
-    }
-
-    @PostMapping("/professor")
-    public ResponseEntity<UsuarioResponse> createProfessor(@RequestBody CreateProfessorRequest request) {
-        UsuarioResponse usuario = usuarioService.createProfessor(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
-    }
-
-    @PutMapping("/professor/{id}")
-    public ResponseEntity<UsuarioResponse> updateProfessor(@PathVariable UUID id, @RequestBody UpdateProfessorRequest request) {
-        UsuarioResponse usuario = usuarioService.updateProfessor(id, request);
-        return ResponseEntity.ok(usuario);
-    }
-
-    @PostMapping("/responsavel")
-    public ResponseEntity<UsuarioResponse> createResponsavel(@RequestBody CreateResponsavelRequest request) {
-        UsuarioResponse usuario = usuarioService.createResponsavel(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
-    }
-
-    @PutMapping("/responsavel/{id}")
-    public ResponseEntity<UsuarioResponse> updateResponsavel(@PathVariable UUID id, @RequestBody UpdateResponsavelRequest request) {
-        UsuarioResponse usuario = usuarioService.updateResponsavel(id, request);
-        return ResponseEntity.ok(usuario);
     }
 }
