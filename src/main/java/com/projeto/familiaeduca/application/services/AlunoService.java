@@ -69,6 +69,7 @@ public class AlunoService {
     public AlunoResponse getById(int matricula) {
         Aluno aluno = alunoRepository.findById(matricula)
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado."));
+
         return alunoMapper.mappingResponse(aluno);
     }
 
@@ -94,6 +95,7 @@ public class AlunoService {
         }
 
         Aluno alunoAtualizado = alunoRepository.save(aluno);
+
         return alunoMapper.mappingResponse(alunoAtualizado);
     }
 
@@ -101,6 +103,7 @@ public class AlunoService {
         if(!alunoRepository.existsById(matricula)) {
             throw new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado.");
         }
+
         alunoRepository.deleteById(matricula);
     }
 }

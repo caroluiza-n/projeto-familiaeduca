@@ -32,6 +32,12 @@ public class AlunoController {
         return ResponseEntity.ok(alunos);
     }
 
+    @GetMapping("/{matricula}")
+    public ResponseEntity<AlunoResponse> getById(@PathVariable int matricula) {
+        AlunoResponse aluno = alunoService.getById(matricula);
+        return ResponseEntity.ok(aluno);
+    }
+
     @PutMapping("/{matricula}")
     public ResponseEntity<AlunoResponse> update(@PathVariable int matricula, @RequestBody UpdateAlunoRequest request) {
         AlunoResponse aluno = alunoService.update(matricula, request);
