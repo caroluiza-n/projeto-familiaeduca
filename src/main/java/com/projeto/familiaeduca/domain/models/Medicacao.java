@@ -28,5 +28,5 @@ public class Medicacao {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_professor", nullable = false)
-    private Professor professor;
+    private Professor professorAplicador;
 }

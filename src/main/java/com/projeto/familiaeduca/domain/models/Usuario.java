@@ -24,8 +24,5 @@ public abstract class Usuario {
     private String senha;
 
     @Column(nullable = false)
-    private String dsFuncao;
-
-    @Column(nullable = false)
     private String telefone;
 }
