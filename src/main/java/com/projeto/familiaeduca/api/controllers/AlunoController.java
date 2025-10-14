@@ -7,6 +7,7 @@ import com.projeto.familiaeduca.application.responses.AlunoResponse;
 import com.projeto.familiaeduca.application.services.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -21,12 +22,14 @@ public class AlunoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<AlunoResponse> create(@RequestBody CreateAlunoRequest request) {
         AlunoResponse aluno = alunoService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(aluno);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<List<AlunoResponse>> getAll() {
         List<AlunoResponse> alunos = alunoService.getAll();
         return ResponseEntity.ok(alunos);
@@ -39,12 +42,14 @@ public class AlunoController {
     }
 
     @PutMapping("/{matricula}")
+    @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<AlunoResponse> update(@PathVariable int matricula, @RequestBody UpdateAlunoRequest request) {
         AlunoResponse aluno = alunoService.update(matricula, request);
         return ResponseEntity.ok(aluno);
     }
 
     @DeleteMapping("/{matricula}")
+    @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<ApiResponse> delete(@PathVariable int matricula) {
         alunoService.delete(matricula);
         ApiResponse resposta = new ApiResponse("Aluno com matrícula " + matricula + " deletado com sucesso.");
