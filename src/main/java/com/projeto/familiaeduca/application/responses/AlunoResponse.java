@@ -2,7 +2,6 @@ package com.projeto.familiaeduca.application.responses;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.UUID;
 

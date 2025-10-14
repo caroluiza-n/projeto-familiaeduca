@@ -6,12 +6,12 @@ import com.projeto.familiaeduca.application.exceptions.ResourceNotFoundException
 import com.projeto.familiaeduca.application.mapper.TurmaMapper;
 import com.projeto.familiaeduca.application.requests.TurmaRequest;
 import com.projeto.familiaeduca.application.responses.TurmaResponse;
+import com.projeto.familiaeduca.application.responses.TurmaResumeResponse;
 import com.projeto.familiaeduca.domain.models.Professor;
 import com.projeto.familiaeduca.domain.models.Turma;
 import com.projeto.familiaeduca.infrastructure.repository.ProfessorRepository;
 import com.projeto.familiaeduca.infrastructure.repository.TurmaRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class TurmaService {
         Professor professor = professorRepository.findById(request.getIdProfessor())
                 .orElseThrow(() -> new ResourceNotFoundException("Professor com id " + request.getIdProfessor() + " não encontrado."));
 
-        if(turmaRepository.existsByIdProfessor(request.getIdProfessor())) {
+        if(turmaRepository.existsByProfessorId(request.getIdProfessor())) {
             throw new DataIntegrityException("O professor " + professor.getNome() + "já está em outra turma.");
         }
 
@@ -48,9 +48,9 @@ public class TurmaService {
         return turmaMapper.mappingResponse(turmaRepository.save(turma));
     }
 
-    public List<TurmaResponse> getAll() {
+    public List<TurmaResumeResponse> getAll() {
         return turmaRepository.findAll().stream()
-                .map(turmaMapper::mappingResponse)
+                .map(turmaMapper::mappingResumeResponse)
                 .collect(Collectors.toList());
     }
 
@@ -64,10 +64,10 @@ public class TurmaService {
         Turma turma = turmaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + id + " não encontrada."));
 
-        if (request.getNome() != null) {
+        if(request.getNome() != null) {
             turma.setNome(request.getNome());
         }
-        if (request.getIdProfessor() != null) {
+        if(request.getIdProfessor() != null) {
             Professor novoProfessor = professorRepository.findById(request.getIdProfessor())
                     .orElseThrow(() -> new ResourceNotFoundException("Professor com id " + request.getIdProfessor() + " não encontrado."));
 
@@ -81,7 +81,7 @@ public class TurmaService {
         Turma turma = turmaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + id + " não encontrada."));
 
-        if (!turma.getAlunos().isEmpty()) {
+        if(!turma.getAlunos().isEmpty()) {
             throw new BusinessRuleException("Não é possível deletar a turma, alunos estão matriculados.");
         }
 

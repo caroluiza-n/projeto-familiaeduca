@@ -8,5 +8,5 @@ import java.util.UUID;
 @Repository
 public interface TurmaRepository extends JpaRepository<Turma, UUID> {
     boolean existsByNome(String nome);
-    boolean existsByIdProfessor(UUID idProfessor);
+    boolean existsByProfessorId(UUID idProfessor);
 }

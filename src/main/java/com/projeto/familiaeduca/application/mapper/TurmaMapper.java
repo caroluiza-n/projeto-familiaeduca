@@ -1,6 +1,7 @@
 package com.projeto.familiaeduca.application.mapper;
 
 import com.projeto.familiaeduca.application.responses.TurmaResponse;
+import com.projeto.familiaeduca.application.responses.TurmaResumeResponse;
 import com.projeto.familiaeduca.domain.models.Turma;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -31,5 +32,16 @@ public class TurmaMapper {
         }
 
         return response;
+    }
+
+    public TurmaResumeResponse mappingResumeResponse(Turma turma) {
+        TurmaResumeResponse resumo = new TurmaResumeResponse();
+        resumo.setId(turma.getId());
+        resumo.setNome(turma.getNome());
+        if(turma.getProfessor() != null) {
+            resumo.setNomeProfessor(turma.getProfessor().getNome());
+        }
+
+        return resumo;
     }
 }

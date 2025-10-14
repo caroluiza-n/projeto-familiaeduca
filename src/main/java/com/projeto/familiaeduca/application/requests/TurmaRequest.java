@@ -1,6 +1,5 @@
 package com.projeto.familiaeduca.application.requests;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import java.util.UUID;
