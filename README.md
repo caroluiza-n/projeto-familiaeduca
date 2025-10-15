@@ -2,10 +2,10 @@
 
 API Rest para gestão e comunicação do ambiente escolar, projetado para fortalecer a conexão entre a instituição, os professores e os responsáveis pelos alunos.
 
-* [Funcionalidades Principais](#funcionalidades-principais)
-* [Tecnologias Utilizadas](#tecnologias-utilizadas)
-* [Arquitetura](#arquitetura)
-* [Como rodar o projeto](#como-rodar-o-projeto)
+* [Funcionalidades Principais](#-funcionalidades-principais)
+* [Tecnologias Utilizadas](#%EF%B8%8F-tecnologias-utilizadas)
+* [Arquitetura](#%EF%B8%8F-arquitetura)
+* [Como rodar o projeto](#-como-rodar-o-projeto)
 
 ---
 
