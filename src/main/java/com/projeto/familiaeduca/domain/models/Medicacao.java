@@ -3,7 +3,7 @@ package com.projeto.familiaeduca.domain.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +19,11 @@ public class Medicacao {
 
     private String dosagem;
 
+    @Lob
+    private String observacoes;
+
     @Column(nullable = false)
-    private LocalDate dataAplicacao;
+    private LocalDateTime dataAplicacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_aluno", nullable = false)
