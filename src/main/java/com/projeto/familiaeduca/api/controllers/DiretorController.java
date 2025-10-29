@@ -4,6 +4,7 @@ import com.projeto.familiaeduca.application.requests.CreateDiretorRequest;
 import com.projeto.familiaeduca.application.requests.UpdateDiretorRequest;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.application.services.DiretorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class DiretorController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> create(@RequestBody CreateDiretorRequest request) {
+    public ResponseEntity<UsuarioResponse> create(@Valid @RequestBody CreateDiretorRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(diretorService.create(request));
     }
 

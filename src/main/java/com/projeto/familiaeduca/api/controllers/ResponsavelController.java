@@ -4,6 +4,7 @@ import com.projeto.familiaeduca.application.requests.CreateResponsavelRequest;
 import com.projeto.familiaeduca.application.requests.UpdateResponsavelRequest;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.application.services.ResponsavelService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ResponsavelController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> create(@RequestBody CreateResponsavelRequest request) {
+    public ResponseEntity<UsuarioResponse> create(@Valid @RequestBody CreateResponsavelRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(responsavelService.create(request));
     }
 

@@ -4,6 +4,7 @@ import com.projeto.familiaeduca.application.requests.CreateProfessorRequest;
 import com.projeto.familiaeduca.application.requests.UpdateProfessorRequest;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.application.services.ProfessorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> create(@RequestBody CreateProfessorRequest request) {
+    public ResponseEntity<UsuarioResponse> create(@Valid @RequestBody CreateProfessorRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorService.create(request));
     }
 
