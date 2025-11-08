@@ -7,11 +7,15 @@ import com.projeto.familiaeduca.application.mapper.TurmaMapper;
 import com.projeto.familiaeduca.application.requests.TurmaRequest;
 import com.projeto.familiaeduca.application.responses.TurmaResponse;
 import com.projeto.familiaeduca.application.responses.TurmaResumeResponse;
+import com.projeto.familiaeduca.domain.models.Disciplina;
 import com.projeto.familiaeduca.domain.models.Professor;
 import com.projeto.familiaeduca.domain.models.Turma;
+import com.projeto.familiaeduca.infrastructure.repository.DisciplinaRepository;
 import com.projeto.familiaeduca.infrastructure.repository.ProfessorRepository;
 import com.projeto.familiaeduca.infrastructure.repository.TurmaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,11 +25,13 @@ public class TurmaService {
 
     private final TurmaRepository turmaRepository;
     private final ProfessorRepository professorRepository;
+    private final DisciplinaRepository disciplinaRepository;
     private final TurmaMapper turmaMapper;
 
-    public TurmaService(TurmaRepository turmaRepository,  ProfessorRepository professorRepository, TurmaMapper turmaMapper) {
+    public TurmaService(TurmaRepository turmaRepository,  ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository, TurmaMapper turmaMapper) {
         this.turmaRepository = turmaRepository;
         this.professorRepository = professorRepository;
+        this.disciplinaRepository = disciplinaRepository;
         this.turmaMapper = turmaMapper;
     }
 
@@ -44,6 +50,8 @@ public class TurmaService {
         Turma turma = new Turma();
         turma.setNome(request.getNome());
         turma.setProfessor(professor);
+        List<Disciplina> disciplinasPadrao = disciplinaRepository.findByPadraoTrue();
+        turma.setDisciplinas(new HashSet<>(disciplinasPadrao));
 
         return turmaMapper.mappingResponse(turmaRepository.save(turma));
     }

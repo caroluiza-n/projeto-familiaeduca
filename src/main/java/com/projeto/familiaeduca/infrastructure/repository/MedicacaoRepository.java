@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface MedicacaoRepository extends JpaRepository<Medicacao, UUID> {
-    List<Medicacao> findByMatriculaOrderByDataAplicacaoDesc(int matricula);
+    List<Medicacao> findByAluno_MatriculaOrderByDataAplicacaoDesc(int matricula);
 }
