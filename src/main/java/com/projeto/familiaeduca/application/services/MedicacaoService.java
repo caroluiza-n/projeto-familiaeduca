@@ -88,7 +88,7 @@ public class MedicacaoService {
             throw new AccessDeniedException("Permissão negada para o acesso ao histórico do aluno.");
         }
 
-        return medicacaoRepository.findByMatriculaOrderByDataAplicacaoDesc(matricula)
+        return medicacaoRepository.findByAluno_MatriculaOrderByDataAplicacaoDesc(matricula)
             .stream()
             .map(medicacaoMapper::mappingResponse)
             .collect(Collectors.toList());
