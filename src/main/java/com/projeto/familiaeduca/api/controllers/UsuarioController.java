@@ -19,6 +19,12 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String login = usuarioService.login(request);
+        return ResponseEntity.ok(login);
+    }
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponse>> getAll() {
         List<UsuarioResponse> usuarios = usuarioService.getAll();

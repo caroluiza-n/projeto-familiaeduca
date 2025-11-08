@@ -7,6 +7,7 @@ import com.projeto.familiaeduca.application.requests.*;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.domain.models.Usuario;
 import com.projeto.familiaeduca.infrastructure.repository.UsuarioRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -39,6 +40,17 @@ public class UsuarioService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário com id " + id + " não encontrado."));
 
         return usuarioMapper.mappingResponse(usuario);
+    }
+
+    public String login(LoginRequest request) {
+        Usuario usuario = usuarioRepository.findByEmail(request.email())
+                .orElseThrow(() -> new BadCredentialsException("Usuário ou senha inválidos"));
+
+        if (!passwordEncoder.matches(request.senha(), usuario.getSenha())) {
+            throw new BadCredentialsException("Usuário ou senha inválidos");
+        }
+
+        return "Login realizado com sucesso!";
     }
 
     public void updatePassword(UUID id, UpdatePasswordRequest request) {
