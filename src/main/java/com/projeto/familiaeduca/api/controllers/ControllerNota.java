@@ -17,10 +17,10 @@ import java.util.UUID;
 @RequestMapping("/notas")
 public class ControllerNota{
 
-    private final NotaService notaService;
+    private final ServiceNota serviceNota;
 
-    public NotaController(NotaService notaService) {
-        this.notaService = notaService;
+    public ControllerNota(ServiceNota serviceNota) {
+        this.serviceNota = serviceNota;
     }
 
 

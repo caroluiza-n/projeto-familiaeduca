@@ -19,7 +19,7 @@ public class ControllerChecklistProfessor {
 
     private final ChecklistProfessorService checklistProfessorService;
 
-    public ChecklistProfessorController(ChecklistProfessorService checklistProfessorService) {
+    public ControllerChecklistProfessor(ChecklistProfessorService checklistProfessorService) {
         this.checklistProfessorService = checklistProfessorService;
     }
 
