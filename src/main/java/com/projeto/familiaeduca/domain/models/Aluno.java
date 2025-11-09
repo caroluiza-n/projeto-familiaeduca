@@ -48,3 +48,4 @@ public class Aluno {
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChecklistResponsavel> checklistsResponsavel = new ArrayList<>();
 }
+
