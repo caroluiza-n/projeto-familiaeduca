@@ -1,5 +1,6 @@
 package com.projeto.familiaeduca.application.responses;
 
+import com.projeto.familiaeduca.domain.models.enums.StatusReuniao;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ public class ReuniaoResponse {
     private UUID id;
     private LocalDate data;
     private String motivo;
+    private StatusReuniao status;
     private ResponsavelResumeResponse responsavel;
 
     @Getter

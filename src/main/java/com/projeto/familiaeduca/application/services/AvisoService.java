@@ -44,13 +44,13 @@ public class AvisoService {
         this.avisoMapper = avisoMapper;
     }
 
-    /* Função que possui a lógica para criação de um Aviso */
+    /* Função que possui a lógica para criação de um aviso */
     public AvisoResponse create(CreateAvisoRequest request) {
-        /* Vê se o Diretor existe no banco de dados */
+        /* Vê se o diretor existe no banco de dados */
         Diretor diretor = diretorRepository.findById(request.getIdDiretor())
                 .orElseThrow(() -> new ResourceNotFoundException("Diretor com id " + request.getIdDiretor() + " não encontrado.")); /* Lança exceção se não existir */
 
-        /* Vê se cada professor que receberá o Aviso existe no banco de dados */
+        /* Vê se cada professor que receberá o aviso existe no banco de dados */
         Set<Professor> professores = request.getIdProfessores().stream()
                 .map(id -> professorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Professor com id " + id + " não encontrado."))) /* Lança exceção se não existir */
@@ -108,7 +108,7 @@ public class AvisoService {
         }
 
         if (request.getIdProfessores() != null) {
-            /* Vê se cada professor que receberá o Aviso existe no banco de dados */
+            /* Vê se cada professor que receberá o aviso existe no banco de dados */
             Set<Professor> novosProfessores = request.getIdProfessores().stream()
                     .map(idProfessor -> professorRepository.findById(idProfessor)
                     .orElseThrow(() -> new ResourceNotFoundException("Professor com id " + idProfessor + " não encontrado."))) /* Lança exceção se não existir */
@@ -118,7 +118,7 @@ public class AvisoService {
         }
 
         if (request.getIdResponsaveis() != null) {
-            /* Vê se cada responsável que receberá o Aviso existe no banco de dados */
+            /* Vê se cada responsável que receberá o aviso existe no banco de dados */
             Set<Responsavel> novosResponsaveis = request.getIdResponsaveis().stream()
                     .map(respId -> responsavelRepository.findById(respId)
                     .orElseThrow(() -> new ResourceNotFoundException("Responsável com id " + respId + " não encontrado."))) /* Lança exceção se não existir */

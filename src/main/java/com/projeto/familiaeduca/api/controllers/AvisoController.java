@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@RestController
+@RequestMapping("/avisos")
 public class AvisoController {
 
     /* Dependência para chamar funções de Service */
@@ -22,39 +24,39 @@ public class AvisoController {
         this.avisoService = avisoService;
     }
 
-    /* Endpoint para inserir um Aviso */
+    /* Endpoint para inserir um aviso */
     @PostMapping
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<AvisoResponse> create(@Valid @RequestBody CreateAvisoRequest request) {
         AvisoResponse aviso = avisoService.create(request); /* Chama a função que cria */
-        return ResponseEntity.status(HttpStatus.CREATED).body(aviso); /* Cria o Aviso e retorna as informações dele */
+        return ResponseEntity.status(HttpStatus.CREATED).body(aviso); /* Cria o aviso e retorna as informações dele */
     }
 
-    /* Endpoint para buscar a lista de todos os Avisos cadastrados */
+    /* Endpoint para buscar a lista de todos os avisos cadastrados */
     @GetMapping
     public ResponseEntity<List<AvisoResponse>> getAll() {
         List<AvisoResponse> avisos = avisoService.getAll(); /* Chama a função que faz o GET */
         return ResponseEntity.ok(avisos); /* Retorna a lista de avisos */
     }
 
-    /* Endpoint para buscar o Aviso pelo id */
+    /* Endpoint para buscar o aviso pelo id */
     @GetMapping("/{id}")
     public ResponseEntity<AvisoResponse> getById(@PathVariable UUID id) {
         AvisoResponse aviso = avisoService.getById(id); /* Chama a função que faz o GET */
-        return ResponseEntity.ok(aviso); /* Retorna o Aviso */
+        return ResponseEntity.ok(aviso); /* Retorna o aviso */
     }
 
-    /* Endpoint para a atualizar informações de um Aviso */
+    /* Endpoint para a atualizar informações de um aviso */
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<AvisoResponse> update(@PathVariable UUID id, @RequestBody UpdateAvisoRequest request) {
         AvisoResponse aviso = avisoService.update(id, request); /* Chama a função que faz a atualização */
-        return ResponseEntity.ok(aviso); /* Retorna o Aviso com as informações atualizadas */
+        return ResponseEntity.ok(aviso); /* Retorna o aviso com as informações atualizadas */
     }
 
-    /* Endpoint para a exclusão de um Aviso*/
+    /* Endpoint para a exclusão de um aviso */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<ApiResponse> delete(@PathVariable UUID id) {
         avisoService.delete(id); /* Chama a função que faz a exclusão */
         ApiResponse resposta = new ApiResponse("Aviso com id " + id + " deletado com sucesso.");

@@ -3,6 +3,7 @@ package com.projeto.familiaeduca.application.responses;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.UUID;
 
 /* Formato de resposta da classe Nota que a API vai entregar */
@@ -14,7 +15,7 @@ public class NotaResponse {
     private String nota;
     private LocalDate dataAvaliacao;
     private AlunoResumeResponse aluno;
-    private TurmaResumeResponse turma;
+    private BoletimResumeResponse boletim;
 
     @Getter
     @Setter
@@ -25,8 +26,9 @@ public class NotaResponse {
 
     @Getter
     @Setter
-    public static class TurmaResumeResponse {
+    public static class BoletimResumeResponse {
         private UUID id;
-        private String nome;
+        private String bimestre;
+        private Year ano;
     }
 }

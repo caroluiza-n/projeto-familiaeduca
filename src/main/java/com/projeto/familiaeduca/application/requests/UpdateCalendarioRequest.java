@@ -10,7 +10,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class UpdateCalendarioRequest {
-
     private String titulo;
     private LocalDate dataEvento;
     private String descricao;

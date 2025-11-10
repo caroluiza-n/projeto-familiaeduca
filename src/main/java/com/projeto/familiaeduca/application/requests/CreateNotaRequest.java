@@ -12,19 +12,15 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CreateNotaRequest {
-    @NotBlank(message = "A disciplina não pode estar em branco.")
-    private String disciplina;
+    @NotNull(message = "O id da disciplina é obrigatório.")
+    private UUID idDisciplina;
+
+    @NotNull(message = "O id do boletim é obrigatório.")
+    private UUID idBoletim;
 
     @NotBlank(message = "A nota não pode estar em branco.")
     private String nota;
 
     @NotNull(message = "A data de avaliação não pode ser nula.")
     @PastOrPresent(message = "A data de avaliação não pode ser futura.")
-    private LocalDate dataAvaliacao;
-
-    @NotNull(message = "A matrícula do aluno não pode ser nula.")
-    private Integer matriculaAluno;
-
-    @NotNull(message = "O id do Professor que está lançando a nota não pode ser nulo.")
-    private UUID idProfessor;
-}
+    private LocalDate dataAvaliacao;}

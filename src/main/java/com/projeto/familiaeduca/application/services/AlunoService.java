@@ -37,7 +37,7 @@ public class AlunoService {
         this.alunoMapper = alunoMapper;
     }
 
-    /* Função que possui a lógica para criação de um Aluno */
+    /* Função que possui a lógica para criação de um aluno */
     public AlunoResponse create(CreateAlunoRequest request) {
         /* Vê se a matrícula já está cadastrada no banco de dados */
         if(alunoRepository.existsById(request.getMatricula())) {

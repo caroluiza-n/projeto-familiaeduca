@@ -4,6 +4,9 @@ import com.projeto.familiaeduca.application.responses.BoletimResponse;
 import com.projeto.familiaeduca.domain.models.Boletim;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /* Função que mapeia da classe BoletimResponse para Boletim */
 @Component
 public class BoletimMapper {
@@ -26,6 +29,19 @@ public class BoletimMapper {
             diretorResumo.setId(boletim.getDiretor().getId());
             diretorResumo.setNome(boletim.getDiretor().getNome());
             response.setDiretor(diretorResumo);
+        }
+
+        if (boletim.getNotas() != null) {
+            List<BoletimResponse.NotaResumeResponse> notasResumo = boletim.getNotas().stream()
+                    .map(nota -> {
+                        BoletimResponse.NotaResumeResponse resumo = new BoletimResponse.NotaResumeResponse();
+                        resumo.setId(nota.getId());
+                        resumo.setNomeDisciplina(nota.getDisciplina().getNome());
+                        resumo.setNota(nota.getNota());
+                        return resumo;
+                    })
+                    .collect(Collectors.toList());
+            response.setNotas(notasResumo);
         }
 
         return response;

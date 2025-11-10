@@ -23,40 +23,40 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    /* Endpoint para cadastrar um Aluno */
+    /* Endpoint para cadastrar um aluno */
     @PostMapping
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<AlunoResponse> create(@Valid @RequestBody CreateAlunoRequest request) {
         AlunoResponse aluno = alunoService.create(request); /* Chama a função que cria */
-        return ResponseEntity.status(HttpStatus.CREATED).body(aluno); /* Cria o Aluno e retorna as informações dele */
+        return ResponseEntity.status(HttpStatus.CREATED).body(aluno); /* Cria o aluno e retorna as informações dele */
     }
 
-    /* Endpoint para buscar a lista de todos os Alunos cadastrados */
+    /* Endpoint para buscar a lista de todos os alunos cadastrados */
     @GetMapping
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<List<AlunoResponse>> getAll() {
         List<AlunoResponse> alunos = alunoService.getAll(); /* Chama a função que faz o GET */
         return ResponseEntity.ok(alunos); /* Retorna a lista de alunos */
     }
 
-    /* Endpoint para buscar o Aluno pela matrícula */
+    /* Endpoint para buscar o aluno pela matrícula */
     @GetMapping("/{matricula}")
     public ResponseEntity<AlunoResponse> getById(@PathVariable int matricula) {
         AlunoResponse aluno = alunoService.getById(matricula); /* Chama a função que faz o GET */
-        return ResponseEntity.ok(aluno); /* Retorna o Aluno */
+        return ResponseEntity.ok(aluno); /* Retorna o aluno */
     }
 
-    /* Endpoint para a atualizar informações de um Aluno */
+    /* Endpoint para a atualizar informações de um aluno */
     @PutMapping("/{matricula}")
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<AlunoResponse> update(@PathVariable int matricula, @RequestBody UpdateAlunoRequest request) {
         AlunoResponse aluno = alunoService.update(matricula, request); /* Chama a função que faz a atualização */
-        return ResponseEntity.ok(aluno); /* Retorna o Aluno com as informações atualizadas */
+        return ResponseEntity.ok(aluno); /* Retorna o aluno com as informações atualizadas */
     }
 
-    /* Endpoint para a exclusão de um Aluno*/
+    /* Endpoint para a exclusão de um aluno */
     @DeleteMapping("/{matricula}")
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o Diretor */
+    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
     public ResponseEntity<ApiResponse> delete(@PathVariable int matricula) {
         alunoService.delete(matricula); /* Chama a função que faz a exclusão */
         ApiResponse resposta = new ApiResponse("Aluno com matrícula " + matricula + " deletado com sucesso.");

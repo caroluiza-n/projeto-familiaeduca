@@ -10,7 +10,9 @@ public class NotaMapper {
     public NotaResponse mappingResponse(Nota nota) {
         NotaResponse response = new NotaResponse();
         response.setId(nota.getId());
-        response.setDisciplina(nota.getDisciplina());
+        if (nota.getDisciplina() != null) {
+            response.setDisciplina(nota.getDisciplina().getNome());
+        }
         response.setNota(nota.getNota());
         response.setDataAvaliacao(nota.getDataAvaliacao());
 
@@ -21,11 +23,12 @@ public class NotaMapper {
             response.setAluno(alunoResumo);
         }
 
-        if (nota.getTurma() != null) {
-            NotaResponse.TurmaResumeResponse turmaResumo = new NotaResponse.TurmaResumeResponse();
-            turmaResumo.setId(nota.getTurma().getId());
-            turmaResumo.setNome(nota.getTurma().getNome());
-            response.setTurma(turmaResumo);
+        if (nota.getBoletim() != null) {
+            NotaResponse.BoletimResumeResponse boletimResumo = new NotaResponse.BoletimResumeResponse();
+            boletimResumo.setId(nota.getBoletim().getId());
+            boletimResumo.setBimestre(nota.getBoletim().getBimestre());
+            boletimResumo.setAno(nota.getBoletim().getAno());
+            response.setBoletim(boletimResumo);
         }
 
         return response;

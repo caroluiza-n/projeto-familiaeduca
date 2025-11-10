@@ -15,12 +15,17 @@ public class Nota {
     private UUID id;
 
     @Column(nullable = false)
-    private String disciplina;
-
-    @Column(nullable = false)
     private String nota;
 
     private LocalDate dataAvaliacao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_disciplina", nullable = false)
+    private Disciplina disciplina;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_boletim", nullable = false)
+    private Boletim boletim;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_aluno", nullable = false)

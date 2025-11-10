@@ -12,6 +12,7 @@ public class ReuniaoMapper {
         response.setId(reuniao.getId());
         response.setData(reuniao.getData());
         response.setMotivo(reuniao.getMotivo());
+        response.setStatus(reuniao.getStatus());
 
         if (reuniao.getResponsavel() != null) {
             ReuniaoResponse.ResponsavelResumeResponse responsavelResumo = new ReuniaoResponse.ResponsavelResumeResponse();
