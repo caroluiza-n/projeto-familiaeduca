@@ -15,13 +15,15 @@ public class JustificativaResponse {
     private AlunoResumeResponse aluno;
     private ResponsavelResumeResponse responsavel;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class AlunoResumeResponse {
         private int matricula;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ResponsavelResumeResponse {
         private UUID id;
         private String nome;

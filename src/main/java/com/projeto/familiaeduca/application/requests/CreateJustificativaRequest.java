@@ -18,12 +18,11 @@ public class CreateJustificativaRequest {
 
     @NotBlank(message = "O motivo da justificativa não pode estar em branco.")
     private String motivo;
-
     private String anexo;
 
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID do Responsável não pode ser nulo.")
+    @NotNull(message = "O id do Responsável não pode ser nulo.")
     private UUID idResponsavel;
 }

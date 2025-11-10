@@ -8,10 +8,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class UpdateCardapioRequest {
-
     private String descricao;
-
-    private List<UUID> idsProfessores;
-
-    private List<UUID> idsResponsaveis;
+    private List<UUID> idProfessores;
+    private List<UUID> idResponsaveis;
 }

@@ -14,11 +14,11 @@ public class ResponsavelResponse {
     private String email;
     private String telefone;
     private final String funcao = "Responsavel";
-
     private String endereco;
     private List<AlunoResumeResponse> alunos;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class AlunoResumeResponse {
         private int matricula;
         private String nome;

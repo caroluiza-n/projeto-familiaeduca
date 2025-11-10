@@ -17,12 +17,11 @@ public class CreateBoletimRequest {
     @NotNull(message = "O ano não pode ser nulo.")
     @Min(value = 2000, message = "O ano deve ser válido.")
     private Integer ano;
-
     private String observacoes;
 
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID do Diretor não pode ser nulo.")
+    @NotNull(message = "O id do Diretor não pode ser nulo.")
     private UUID idDiretor;
 }

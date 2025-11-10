@@ -14,10 +14,8 @@ public class CreateCardapioRequest {
     @NotBlank(message = "A descrição do cardápio não pode estar em branco.")
     private String descricao;
 
-    @NotNull(message = "O ID do Diretor não pode ser nulo.")
+    @NotNull(message = "O id do Diretor não pode ser nulo.")
     private UUID idDiretor;
-
-    private List<UUID> idsProfessores;
-
-    private List<UUID> idsResponsaveis;
+    private List<UUID> idProfessores;
+    private List<UUID> idResponsaveis;
 }

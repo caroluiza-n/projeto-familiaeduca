@@ -13,7 +13,8 @@ public class ReuniaoResponse {
     private String motivo;
     private ResponsavelResumeResponse responsavel;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ResponsavelResumeResponse {
         private UUID id;
         private String nome;

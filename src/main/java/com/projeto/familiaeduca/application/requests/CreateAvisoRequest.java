@@ -19,11 +19,8 @@ public class CreateAvisoRequest {
     @NotBlank(message = "A mensagem não pode estar em branco.")
     private String mensagem;
 
-    @NotNull(message = "O ID do Diretor não pode ser nulo.")
+    @NotNull(message = "O id do Diretor não pode ser nulo.")
     private UUID idDiretor;
-
-    private List<UUID> idsProfessores;
-
-
-    private List<UUID> idsResponsaveis;
+    private List<UUID> idProfessores;
+    private List<UUID> idResponsaveis;
 }

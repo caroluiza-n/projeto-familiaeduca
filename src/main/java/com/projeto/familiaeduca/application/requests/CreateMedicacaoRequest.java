@@ -9,7 +9,6 @@ import lombok.Setter;
 public class CreateMedicacaoRequest {
     @NotBlank(message = "O nome do medicamento não pode estar em branco.")
     private String medicamento;
-
     private String dosagem;
     private String observacoes;
     private int matricula;

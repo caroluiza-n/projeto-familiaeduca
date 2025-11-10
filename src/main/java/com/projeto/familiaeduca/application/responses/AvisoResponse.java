@@ -17,19 +17,22 @@ public class AvisoResponse {
     private List<ProfessorResumeResponse> professores;
     private List<ResponsavelResumeResponse> responsaveis;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class DiretorResumeResponse {
         private UUID id;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ProfessorResumeResponse {
         private UUID id;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ResponsavelResumeResponse {
         private UUID id;
         private String nome;

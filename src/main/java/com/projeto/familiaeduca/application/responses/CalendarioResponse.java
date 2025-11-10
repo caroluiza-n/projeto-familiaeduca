@@ -14,19 +14,22 @@ public class CalendarioResponse {
     private List<ProfessorResumeResponse> professoresNotificados;
     private List<ResponsavelResumeResponse> responsaveisNotificados;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class DiretorResumeResponse {
         private UUID id;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ProfessorResumeResponse {
         private UUID id;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class ResponsavelResumeResponse {
         private UUID id;
         private String nome;

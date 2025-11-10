@@ -14,13 +14,15 @@ public class FrequenciaResponse {
     private AlunoResumeResponse aluno;
     private TurmaResumeResponse turma;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class AlunoResumeResponse {
         private int matricula;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class TurmaResumeResponse {
         private UUID id;
         private String nome;

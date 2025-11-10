@@ -22,6 +22,6 @@ public class CreateChecklistResponsavelRequest {
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID do Responsável não pode ser nulo.")
+    @NotNull(message = "O id do Responsável não pode ser nulo.")
     private UUID idResponsavel;
 }

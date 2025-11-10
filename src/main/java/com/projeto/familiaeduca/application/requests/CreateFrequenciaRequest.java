@@ -21,9 +21,9 @@ public class CreateFrequenciaRequest {
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID da turma não pode ser nulo.")
+    @NotNull(message = "O id da turma não pode ser nulo.")
     private UUID idTurma;
 
-    @NotNull(message = "O ID do Professor não pode ser nulo.")
+    @NotNull(message = "O id do Professor não pode ser nulo.")
     private UUID idProfessor;
 }

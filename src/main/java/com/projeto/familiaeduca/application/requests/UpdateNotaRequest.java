@@ -8,10 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UpdateNotaRequest {
-
     private String disciplina;
     private String nota;
-
-    @PastOrPresent(message = "A data de avaliação não pode ser futura.")
     private LocalDate dataAvaliacao;
 }

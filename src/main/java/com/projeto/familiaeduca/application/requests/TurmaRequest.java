@@ -10,6 +10,5 @@ import java.util.UUID;
 public class TurmaRequest {
     @NotBlank(message = "O nome da turma não pode estar em branco.")
     private String nome;
-
     private UUID idProfessor;
 }

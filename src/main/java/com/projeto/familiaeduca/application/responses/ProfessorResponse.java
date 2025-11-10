@@ -15,7 +15,8 @@ public class ProfessorResponse {
 
     private TurmaResumeResponse turma;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class TurmaResumeResponse {
         private UUID id;
         private String nome;

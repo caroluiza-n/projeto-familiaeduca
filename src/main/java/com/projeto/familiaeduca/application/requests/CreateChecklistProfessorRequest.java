@@ -14,12 +14,11 @@ public class CreateChecklistProfessorRequest {
     @NotNull(message = "A data do Checklist não pode ser nula.")
     @PastOrPresent(message = "A data do Checklist não pode ser futura.")
     private LocalDate dataChecklist;
-
     private String observacoes;
 
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID do Professor não pode ser nulo.")
+    @NotNull(message = "O id do Professor não pode ser nulo.")
     private UUID idProfessor;
 }

@@ -12,15 +12,9 @@ import java.util.UUID;
 @Setter
 public class UpdateCalendarioRequest {
 
-    @Size(max = 100, message = "O título deve ter no máximo 100 caracteres.")
     private String titulo;
-
-    @FutureOrPresent(message = "A data do evento deve ser hoje ou uma data futura.")
     private LocalDate dataEvento;
-
     private String descricao;
-
-    private List<UUID> idsProfessores;
-
-    private List<UUID> idsResponsaveis;
+    private List<UUID> idProfessores;
+    private List<UUID> idResponsaveis;
 }

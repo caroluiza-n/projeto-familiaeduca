@@ -25,6 +25,6 @@ public class CreateNotaRequest {
     @NotNull(message = "A matrícula do aluno não pode ser nula.")
     private Integer matriculaAluno;
 
-    @NotNull(message = "O ID do Professor (que está lançando a nota) não pode ser nulo.")
+    @NotNull(message = "O id do Professor que está lançando a nota não pode ser nulo.")
     private UUID idProfessor;
 }

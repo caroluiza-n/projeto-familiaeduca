@@ -15,13 +15,15 @@ public class BoletimResponse {
     private AlunoResumeResponse aluno;
     private DiretorResumeResponse diretor;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class AlunoResumeResponse {
         private int matricula;
         private String nome;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class DiretorResumeResponse {
         private UUID id;
         private String nome;

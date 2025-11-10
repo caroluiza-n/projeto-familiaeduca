@@ -19,6 +19,6 @@ public class CreateReuniaoRequest {
     @NotBlank(message = "O motivo da reunião não pode estar em branco.")
     private String motivo;
 
-    @NotNull(message = "O ID do Responsável não pode ser nulo.")
+    @NotNull(message = "O id do Responsável não pode ser nulo.")
     private UUID idResponsavel;
 }
