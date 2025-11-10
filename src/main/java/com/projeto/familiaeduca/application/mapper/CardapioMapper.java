@@ -5,9 +5,9 @@ import com.projeto.familiaeduca.domain.models.Cardapio;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
+/* Função que mapeia da classe CardapioResponse para Cardapio */
 @Component
 public class CardapioMapper {
-
     public CardapioResponse mappingResponse(Cardapio cardapio) {
         CardapioResponse response = new CardapioResponse();
         response.setId(cardapio.getId());

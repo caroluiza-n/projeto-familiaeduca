@@ -1,4 +1,4 @@
-package com.projeto.familiaeduca.infrastructure.configuration;
+/** package com.projeto.familiaeduca.infrastructure.configuration;
 
 import com.projeto.familiaeduca.domain.models.Disciplina;
 import com.projeto.familiaeduca.infrastructure.repository.DisciplinaRepository;
@@ -46,4 +46,4 @@ public class DataSeeder implements CommandLineRunner {
             }
         }
     }
-}
+} **/

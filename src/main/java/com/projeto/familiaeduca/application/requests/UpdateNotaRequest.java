@@ -1,10 +1,10 @@
 package com.projeto.familiaeduca.application.requests;
 
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
 
+/* DTO para atualização de Nota */
 @Getter
 @Setter
 public class UpdateNotaRequest {

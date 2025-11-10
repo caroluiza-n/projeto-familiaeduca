@@ -7,10 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.UUID;
 
+/* DTO para criação de Boletim */
 @Getter
 @Setter
 public class CreateBoletimRequest {
-
     @NotBlank(message = "O bimestre não pode estar em branco.")
     private String bimestre;
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+/* Parte que interage com o banco de dados para informações sobre Disciplina */
 @Repository
 public interface DisciplinaRepository extends JpaRepository<Disciplina, UUID> {
     List<Disciplina> findByNomeIn(List<String> disciplinas);

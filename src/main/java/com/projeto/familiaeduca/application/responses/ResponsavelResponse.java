@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/* Formato de resposta da classe Responsavel que a API vai entregar */
 @Getter
 @Setter
 public class ResponsavelResponse {

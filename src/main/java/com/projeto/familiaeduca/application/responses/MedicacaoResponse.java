@@ -5,6 +5,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/* Formato de resposta da classe Medicacao que a API vai entregar */
 @Getter
 @Setter
 public class MedicacaoResponse {

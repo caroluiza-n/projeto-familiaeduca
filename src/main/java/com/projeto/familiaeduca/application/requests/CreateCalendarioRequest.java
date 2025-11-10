@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/* DTO para criação de Calendario */
 @Getter
 @Setter
 public class CreateCalendarioRequest {
-
     @NotBlank(message = "O título do evento não pode estar em branco.")
     @Size(max = 100, message = "O título deve ter no máximo 100 caracteres.")
     private String titulo;

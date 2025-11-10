@@ -25,10 +25,10 @@ public class Cardapio {
     private Diretor diretor;
 
     @ManyToMany
-    @JoinTable(name = "aviso_professor", joinColumns = @JoinColumn(name = "id_aviso"), inverseJoinColumns = @JoinColumn(name = "id_professor"))
+    @JoinTable(name = "cardapio_professor", joinColumns = @JoinColumn(name = "id_aviso"), inverseJoinColumns = @JoinColumn(name = "id_professor"))
     private Set<Professor> avisosProfessores = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "aviso_responsavel", joinColumns = @JoinColumn(name = "id_aviso"), inverseJoinColumns = @JoinColumn(name = "id_responsavel"))
+    @JoinTable(name = "cardapio_responsavel", joinColumns = @JoinColumn(name = "id_aviso"), inverseJoinColumns = @JoinColumn(name = "id_responsavel"))
     private Set<Responsavel> avisosResponsaveis = new HashSet<>();
 }

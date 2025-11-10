@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+/* Parte que interage com o banco de dados para informações sobre Justificativa */
 @Repository
 public interface JustificativaRepository extends JpaRepository<Justificativa, UUID> {
     List<Justificativa> findByResponsavelId(UUID idResponsavel);

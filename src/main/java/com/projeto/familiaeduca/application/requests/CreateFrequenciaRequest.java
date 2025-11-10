@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para criação de Frequencia */
 @Getter
 @Setter
 public class CreateFrequenciaRequest {
-
     @NotNull(message = "A data não pode ser nula.")
     @PastOrPresent(message = "A data da frequência não pode ser futura.")
     private LocalDate data;

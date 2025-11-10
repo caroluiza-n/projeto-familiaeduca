@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+/* DTO para criação de Professor */
 @Getter
 @Setter
 public class CreateProfessorRequest {

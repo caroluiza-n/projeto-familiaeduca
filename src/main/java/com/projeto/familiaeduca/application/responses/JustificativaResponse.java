@@ -5,6 +5,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* Formato de resposta da classe Justificativa que a API vai entregar */
 @Getter
 @Setter
 public class JustificativaResponse {

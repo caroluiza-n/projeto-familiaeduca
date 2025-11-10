@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.time.LocalDate;
 import java.util.Optional;
 
+/* Parte que interage com o banco de dados para informações sobre Frequencia */
 @Repository
 public interface FrequenciaRepository extends JpaRepository<Frequencia, UUID> {
     Optional<Frequencia> findByAlunoMatriculaAndData(int matricula, LocalDate data);

@@ -8,10 +8,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para criação de Checklist para Responsavel */
 @Getter
 @Setter
 public class CreateChecklistResponsavelRequest {
-
     @NotNull(message = "A data do Checklist não pode ser nula.")
     @PastOrPresent(message = "A data do Checklist não pode ser futura.")
     private LocalDate dataChecklist;

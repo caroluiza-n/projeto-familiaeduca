@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class AlunoService {
 
+    /* Dependências para chamar Repositorys e Mapper */
     private final AlunoRepository alunoRepository;
     private final TurmaRepository turmaRepository;
     private final ResponsavelRepository responsavelRepository;
@@ -36,17 +37,22 @@ public class AlunoService {
         this.alunoMapper = alunoMapper;
     }
 
+    /* Função que possui a lógica para criação de um Aluno */
     public AlunoResponse create(CreateAlunoRequest request) {
+        /* Vê se a matrícula já está cadastrada no banco de dados */
         if(alunoRepository.existsById(request.getMatricula())) {
-            throw new DataIntegrityException("A matrícula " + request.getMatricula() + "já está em uso.");
+            throw new DataIntegrityException("A matrícula " + request.getMatricula() + "já está em uso."); /* Lança exceção se estiver cadastrada */
         }
 
+        /* Vê se a turma existe no banco de dados */
         Turma turma = turmaRepository.findById(request.getIdTurma())
-                .orElseThrow(() -> new ResourceNotFoundException("Turma com id " +  request.getIdTurma() + "não encontrada."));
+                .orElseThrow(() -> new ResourceNotFoundException("Turma com id " +  request.getIdTurma() + "não encontrada.")); /* Lança exceção se não existir */
 
+        /* Vê se o responsável existe no banco de dados */
         Responsavel responsavel = responsavelRepository.findById(request.getIdResponsavel())
-                .orElseThrow(() -> new ResourceNotFoundException("Responsável com id " + request.getIdResponsavel() + " não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Responsável com id " + request.getIdResponsavel() + " não encontrado.")); /* Lança exceção se não existir */
 
+        /* Cria o aluno e chama a função que salva no banco de dados */
         Aluno aluno = new Aluno();
         aluno.setMatricula(request.getMatricula());
         aluno.setNome(request.getNome());
@@ -60,50 +66,62 @@ public class AlunoService {
         return alunoMapper.mappingResponse(novoAluno);
     }
 
+    /* Função que possui a lógica para retornar a lista com todos os alunos cadastrados */
     public List<AlunoResponse> getAll() {
         return alunoRepository.findAll().stream()
                 .map(alunoMapper::mappingResponse)
                 .collect(Collectors.toList());
     }
 
+    /* Função que possui a lógica para encontrar um aluno cadastrado */
     public AlunoResponse getById(int matricula) {
+        /* Vê se o aluno existe no banco de dados */
         Aluno aluno = alunoRepository.findById(matricula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado.")); /* Lança exceção se não existir */
 
         return alunoMapper.mappingResponse(aluno);
     }
 
+    /* Função que possui a lógica para atualizar as informações de um aluno */
     public AlunoResponse update(int matricula, UpdateAlunoRequest request) {
+        /* Vê se o aluno existe no banco de dados */
         Aluno aluno = alunoRepository.findById(matricula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado.")); /* Lança exceção se não existir */
 
+        /* Confere se tudo está preenchido corretamente */
         if(request.getNome() != null) aluno.setNome(request.getNome());
         if(request.getDataNascimento() != null) aluno.setDataNascimento(request.getDataNascimento());
         if(request.getLaudo() != null) aluno.setLaudo(request.getLaudo());
         if(request.getAlergias() != null) aluno.setAlergias(request.getAlergias());
 
         if(request.getIdTurma() != null) {
+            /* Vê se a turma existe no banco de dados */
             Turma novaTurma = turmaRepository.findById(request.getIdTurma())
-                    .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + request.getIdTurma() + " não encontrada."));
+                    .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + request.getIdTurma() + " não encontrada.")); /* Lança exceção se não existir */
             aluno.setTurma(novaTurma);
         }
 
         if(request.getIdResponsavel() != null) {
+            /* Vê se o responsável existe no banco de dados */
             Responsavel novoResponsavel = responsavelRepository.findById(request.getIdResponsavel())
-                    .orElseThrow(() -> new ResourceNotFoundException("Responsável com ID " + request.getIdResponsavel() + " não encontrado."));
+                    .orElseThrow(() -> new ResourceNotFoundException("Responsável com ID " + request.getIdResponsavel() + " não encontrado.")); /* Lança exceção se não existir */
             aluno.setResponsavel(novoResponsavel);
         }
 
+        /* Chama a função que salva o aluno atualizado no banco de dados */
         Aluno alunoAtualizado = alunoRepository.save(aluno);
 
         return alunoMapper.mappingResponse(alunoAtualizado);
     }
 
+    /* Função que possui a lógica para exclusão de um aluno */
     public void delete(int matricula) {
+        /* Vê se o aluno existe no banco de dados */
         if(!alunoRepository.existsById(matricula)) {
-            throw new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado.");
+            throw new ResourceNotFoundException("Aluno com matrícula " + matricula + " não encontrado."); /* Lança exceção se não existir */
         }
 
+        /* Chama a função para excluir o aluno do banco de dados */
         alunoRepository.deleteById(matricula);
     }
 }

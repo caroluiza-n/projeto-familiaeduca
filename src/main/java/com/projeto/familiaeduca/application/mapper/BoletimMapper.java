@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.BoletimResponse;
 import com.projeto.familiaeduca.domain.models.Boletim;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe BoletimResponse para Boletim */
 @Component
 public class BoletimMapper {
-
     public BoletimResponse mappingResponse(Boletim boletim) {
         BoletimResponse response = new BoletimResponse();
         response.setId(boletim.getId());

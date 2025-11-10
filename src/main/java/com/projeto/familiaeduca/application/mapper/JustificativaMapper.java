@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.JustificativaResponse;
 import com.projeto.familiaeduca.domain.models.Justificativa;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe JustificativaResponse para Justificativa */
 @Component
 public class JustificativaMapper {
-
     public JustificativaResponse mappingResponse(Justificativa justificativa) {
         JustificativaResponse response = new JustificativaResponse();
         response.setId(justificativa.getId());

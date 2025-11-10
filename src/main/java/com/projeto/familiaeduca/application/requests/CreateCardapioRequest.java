@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.util.List;
 import java.util.UUID;
 
+/* DTO para criação de Cardapio */
 @Getter
 @Setter
 public class CreateCardapioRequest {
-
     @NotBlank(message = "A descrição do cardápio não pode estar em branco.")
     private String descricao;
 

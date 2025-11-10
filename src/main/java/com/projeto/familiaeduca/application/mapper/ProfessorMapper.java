@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.ProfessorResponse;
 import com.projeto.familiaeduca.domain.models.Professor;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe ProfessorResponse para Professor */
 @Component
 public class ProfessorMapper {
-
     public ProfessorResponse mappingResponse(Professor professor) {
         ProfessorResponse response = new ProfessorResponse();
         response.setId(professor.getId());

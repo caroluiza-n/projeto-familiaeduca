@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.UUID;
 
+/* DTO para criação e atualização de Turma */
 @Getter
 @Setter
 public class TurmaRequest {

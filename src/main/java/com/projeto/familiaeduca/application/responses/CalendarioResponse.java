@@ -5,6 +5,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.UUID;
 
+/* Formato de resposta da classe Calendario que a API vai entregar */
 @Getter
 @Setter
 public class CalendarioResponse {

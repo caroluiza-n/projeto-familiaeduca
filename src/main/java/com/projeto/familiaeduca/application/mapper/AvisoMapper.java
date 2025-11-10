@@ -5,9 +5,9 @@ import com.projeto.familiaeduca.domain.models.Aviso;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
+/* Função que mapeia da classe AvisoResponse para Aviso */
 @Component
 public class AvisoMapper {
-
     public AvisoResponse mappingResponse(Aviso aviso) {
         AvisoResponse response = new AvisoResponse();
         response.setId(aviso.getId());

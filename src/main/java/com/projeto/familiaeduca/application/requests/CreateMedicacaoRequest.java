@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+/* DTO para criação de Medicacao */
 @Getter
 @Setter
 public class CreateMedicacaoRequest {

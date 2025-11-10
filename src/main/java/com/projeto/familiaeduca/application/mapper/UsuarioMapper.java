@@ -7,6 +7,7 @@ import com.projeto.familiaeduca.domain.models.Responsavel;
 import com.projeto.familiaeduca.domain.models.Usuario;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe UsuarioResponse para Usuario */
 @Component
 public class UsuarioMapper {
     public UsuarioResponse mappingResponse(Usuario usuario) {

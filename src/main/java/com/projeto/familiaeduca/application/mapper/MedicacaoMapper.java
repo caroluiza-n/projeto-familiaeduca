@@ -4,6 +4,7 @@ import com.projeto.familiaeduca.application.responses.MedicacaoResponse;
 import com.projeto.familiaeduca.domain.models.Medicacao;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe MedicacaoResponse para Medicacao */
 @Component
 public class MedicacaoMapper {
     public MedicacaoResponse mappingResponse(Medicacao medicacao) {

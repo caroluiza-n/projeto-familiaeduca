@@ -10,6 +10,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/* Funções personalizadas que retornam a mensagem e o status code em caso de erro */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

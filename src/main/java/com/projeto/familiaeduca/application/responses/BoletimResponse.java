@@ -5,6 +5,7 @@ import lombok.Setter;
 import java.time.Year;
 import java.util.UUID;
 
+/* Formato de resposta da classe Boletim que a API vai entregar */
 @Getter
 @Setter
 public class BoletimResponse {

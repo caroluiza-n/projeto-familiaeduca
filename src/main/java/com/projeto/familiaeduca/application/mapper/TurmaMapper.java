@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/* Função que mapeia da classe TurmaResponse para Turma */
 @Component
 public class TurmaMapper {
     public TurmaResponse mappingResponse(Turma turma) {

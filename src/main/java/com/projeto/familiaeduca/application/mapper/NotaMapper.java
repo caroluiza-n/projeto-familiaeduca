@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.NotaResponse;
 import com.projeto.familiaeduca.domain.models.Nota;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe NotaResponse para Nota */
 @Component
 public class NotaMapper {
-
     public NotaResponse mappingResponse(Nota nota) {
         NotaResponse response = new NotaResponse();
         response.setId(nota.getId());

@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.ReuniaoResponse;
 import com.projeto.familiaeduca.domain.models.Reuniao;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe ReuniaoResponse para Reuniao */
 @Component
 public class ReuniaoMapper {
-
     public ReuniaoResponse mappingResponse(Reuniao reuniao) {
         ReuniaoResponse response = new ReuniaoResponse();
         response.setId(reuniao.getId());

@@ -4,6 +4,7 @@ import com.projeto.familiaeduca.application.responses.AlunoResponse;
 import com.projeto.familiaeduca.domain.models.Aluno;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe AlunoResponse para Aluno */
 @Component
 public class AlunoMapper {
     public AlunoResponse mappingResponse(Aluno aluno) {

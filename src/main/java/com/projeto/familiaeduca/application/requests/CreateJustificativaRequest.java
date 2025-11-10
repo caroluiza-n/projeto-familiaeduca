@@ -8,10 +8,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para criação de Justificativa */
 @Getter
 @Setter
 public class CreateJustificativaRequest {
-
     @NotNull(message = "A data da falta não pode ser nula.")
     @PastOrPresent(message = "A data da falta não pode ser futura.")
     private LocalDate dataFalta;

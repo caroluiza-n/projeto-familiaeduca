@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.RenovacaoMatriculaResponse
 import com.projeto.familiaeduca.domain.models.RenovacaoMatricula;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe RenovacaoMatriculaResponse para RenovacaoMatricula */
 @Component
 public class RenovacaoMatriculaMapper {
-
     public RenovacaoMatriculaResponse mappingResponse(RenovacaoMatricula renovacao) {
         RenovacaoMatriculaResponse response = new RenovacaoMatriculaResponse();
         response.setId(renovacao.getId());

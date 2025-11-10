@@ -5,9 +5,9 @@ import com.projeto.familiaeduca.domain.models.Responsavel;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
+/* Função que mapeia da classe ResponsavelResponse para Responsavel */
 @Component
 public class ResponsavelMapper {
-
     public ResponsavelResponse mappingResponse(Responsavel responsavel) {
         ResponsavelResponse response = new ResponsavelResponse();
         response.setId(responsavel.getId());

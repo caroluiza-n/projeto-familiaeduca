@@ -8,10 +8,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para criação de Reuniao */
 @Getter
 @Setter
 public class CreateReuniaoRequest {
-
     @NotNull(message = "A data da reunião não pode ser nula.")
     @FutureOrPresent(message = "A data da reunião deve ser hoje ou uma data futura.")
     private LocalDate data;

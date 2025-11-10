@@ -5,6 +5,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para atualização de Aluno */
 @Getter
 @Setter
 public class UpdateAlunoRequest {

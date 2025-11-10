@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.FrequenciaResponse;
 import com.projeto.familiaeduca.domain.models.Frequencia;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe FrequenciaResponse para Frequencia */
 @Component
 public class FrequenciaMapper {
-
     public FrequenciaResponse mappingResponse(Frequencia frequencia) {
         FrequenciaResponse response = new FrequenciaResponse();
         response.setId(frequencia.getId());

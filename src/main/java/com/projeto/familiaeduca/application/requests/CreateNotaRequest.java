@@ -8,10 +8,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/* DTO para criação de Nota */
 @Getter
 @Setter
 public class CreateNotaRequest {
-
     @NotBlank(message = "A disciplina não pode estar em branco.")
     private String disciplina;
 

@@ -5,9 +5,9 @@ import com.projeto.familiaeduca.domain.models.Calendario;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
+/* Função que mapeia da classe CalendarioResponse para Calendario */
 @Component
 public class CalendarioMapper {
-
     public CalendarioResponse mappingResponse(Calendario calendario) {
         CalendarioResponse response = new CalendarioResponse();
         response.setId(calendario.getId());

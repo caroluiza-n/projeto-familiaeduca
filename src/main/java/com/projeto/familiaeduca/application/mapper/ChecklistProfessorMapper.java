@@ -4,9 +4,9 @@ import com.projeto.familiaeduca.application.responses.ChecklistProfessorResponse
 import com.projeto.familiaeduca.domain.models.ChecklistProfessor;
 import org.springframework.stereotype.Component;
 
+/* Função que mapeia da classe ChecklistProfessorResponse para ChecklistProfessor */
 @Component
 public class ChecklistProfessorMapper {
-
     public ChecklistProfessorResponse mappingResponse(ChecklistProfessor checklist) {
         ChecklistProfessorResponse response = new ChecklistProfessorResponse();
         response.setId(checklist.getId());

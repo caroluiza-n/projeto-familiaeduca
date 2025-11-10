@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.UUID;
 
+/* Formato de resposta da classe Turma mais resumida que a API vai entregar */
 @Getter
 @Setter
 public class TurmaResumeResponse {

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/* Formato de resposta da classe Aviso que a API vai entregar */
 @Getter
 @Setter
 public class AvisoResponse {
