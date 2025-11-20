@@ -35,14 +35,7 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
-    public UsuarioResponse getById(UUID id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário com id " + id + " não encontrado."));
-
-        return usuarioMapper.mappingResponse(usuario);
-    }
-
-    public String login(LoginRequest request) {
+    public UsuarioResponse login(LoginRequest request) {
         Usuario usuario = usuarioRepository.findByEmail(request.email())
                 .orElseThrow(() -> new BadCredentialsException("Usuário ou senha inválidos"));
 
@@ -50,8 +43,25 @@ public class UsuarioService {
             throw new BadCredentialsException("Usuário ou senha inválidos");
         }
 
-        return "Login realizado com sucesso!";
+        return usuarioMapper.mappingResponse(usuario);
     }
+
+    public UsuarioResponse getById(UUID id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário com id " + id + " não encontrado."));
+        return usuarioMapper.mappingResponse(usuario);
+    }
+
+//    public String login(LoginRequest request) {
+//        Usuario usuario = usuarioRepository.findByEmail(request.email())
+//                .orElseThrow(() -> new BadCredentialsException("Usuário ou senha inválidos"));
+//
+//        if (!passwordEncoder.matches(request.senha(), usuario.getSenha())) {
+//            throw new BadCredentialsException("Usuário ou senha inválidos");
+//        }
+//
+//        return "Login realizado com sucesso!";
+//    }
 
     public void updatePassword(UUID id, UpdatePasswordRequest request) {
         Usuario usuario = usuarioRepository.findById(id)

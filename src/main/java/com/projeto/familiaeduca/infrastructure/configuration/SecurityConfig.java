@@ -23,10 +23,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/professores").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/diretores").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/responsaveis").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/usuarios/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/professores/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/diretores/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/responsaveis/**").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .httpBasic(withDefaults());
         return http.build();

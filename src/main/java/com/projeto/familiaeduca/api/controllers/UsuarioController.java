@@ -20,9 +20,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        String login = usuarioService.login(request);
-        return ResponseEntity.ok(login);
+    public ResponseEntity<UsuarioResponse> login(@RequestBody LoginRequest request) {
+        UsuarioResponse usuario = usuarioService.login(request);
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping
