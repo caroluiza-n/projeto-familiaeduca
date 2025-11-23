@@ -14,6 +14,7 @@ import com.projeto.familiaeduca.infrastructure.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,6 +94,13 @@ public class ChecklistProfessorService {
         /* Chama a função que salva o checklist atualizado no banco de dados */
         ChecklistProfessor checklistAtualizado = checklistProfessorRepository.save(checklist);
         return checklistProfessorMapper.mappingResponse(checklistAtualizado);
+    }
+
+    /* Busca o checklist feito pelo professor e manda para o responsavel */
+    public ChecklistProfessorResponse buscarPorAlunoEData(Integer matricula, LocalDate data) {
+        return checklistProfessorRepository.findFirstByAlunoMatriculaAndDataChecklist(matricula, data)
+                .map(checklistProfessorMapper::mappingResponse)
+                .orElse(null);
     }
 
     /* Função que possui a lógica para exclusão de um checklist */

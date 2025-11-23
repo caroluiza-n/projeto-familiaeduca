@@ -17,18 +17,21 @@ import java.util.UUID;
 @RequestMapping("/turmas")
 public class TurmaController {
 
+    /* Dependência para chamar funções de Service */
     private final TurmaService turmaService;
 
     public TurmaController(TurmaService turmaService) {
         this.turmaService = turmaService;
     }
 
+    /* Endpoint para inserir uma turma */
     @PostMapping
     @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<TurmaResponse> create(@Valid @RequestBody TurmaRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(turmaService.create(request));
     }
 
+    /* Endpoint para buscar a lista de todas as turmas cadastradas */
     @GetMapping
     @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR')")
     public ResponseEntity<List<TurmaResumeResponse>> getAll() {
@@ -40,12 +43,14 @@ public class TurmaController {
         return ResponseEntity.ok(turmaService.getById(id));
     }
 
+    /* Endpoint para a atualizar informações de uma turma */
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<TurmaResponse> update(@PathVariable UUID id, @RequestBody TurmaRequest request) {
         return ResponseEntity.ok(turmaService.update(id, request));
     }
 
+    /* Endpoint para a exclusão de uma turma */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('DIRETOR')")
     public ResponseEntity<ApiResponse> delete(@PathVariable UUID id) {

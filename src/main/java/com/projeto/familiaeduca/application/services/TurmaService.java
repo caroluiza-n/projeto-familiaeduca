@@ -13,6 +13,8 @@ import com.projeto.familiaeduca.domain.models.Turma;
 import com.projeto.familiaeduca.infrastructure.repository.DisciplinaRepository;
 import com.projeto.familiaeduca.infrastructure.repository.ProfessorRepository;
 import com.projeto.familiaeduca.infrastructure.repository.TurmaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TurmaService {
-
+    /* Dependências para chamar Repositorys e Mapper */
     private final TurmaRepository turmaRepository;
     private final ProfessorRepository professorRepository;
     private final DisciplinaRepository disciplinaRepository;
@@ -35,6 +37,7 @@ public class TurmaService {
         this.turmaMapper = turmaMapper;
     }
 
+    /* Função que possui a lógica para criação de uma turma */
     public TurmaResponse create(TurmaRequest request) {
         if(turmaRepository.existsByNome(request.getNome())) {
             throw new DataIntegrityException("Já existe uma turma com o nome " + request.getNome() + ".");
@@ -46,7 +49,7 @@ public class TurmaService {
         if(turmaRepository.existsByProfessorId(request.getIdProfessor())) {
             throw new DataIntegrityException("O professor " + professor.getNome() + "já está em outra turma.");
         }
-
+        /* Cria a nota */
         Turma turma = new Turma();
         turma.setNome(request.getNome());
         turma.setProfessor(professor);
@@ -55,19 +58,33 @@ public class TurmaService {
 
         return turmaMapper.mappingResponse(turmaRepository.save(turma));
     }
-
+    /* Função que possui a lógica para retornar a lista com todas as turmas cadastradas para diretor e apenas a turma que pertence ao professor */
     public List<TurmaResumeResponse> getAll() {
-        return turmaRepository.findAll().stream()
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        String roles = auth.getAuthorities().toString();
+
+        List<Turma> turmas;
+
+        if (roles.contains("PROFESSOR") && !roles.contains("DIRETOR")) {
+            turmas = turmaRepository.findByProfessorEmail(email);
+        } else {
+            turmas = turmaRepository.findAll();
+        }
+
+        return turmas.stream()
                 .map(turmaMapper::mappingResumeResponse)
                 .collect(Collectors.toList());
     }
 
+    /* Função que possui a lógica para encontrar uma turma cadastrada */
     public TurmaResponse getById(UUID id) {
         Turma turma = turmaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + id + " não encontrada."));
         return turmaMapper.mappingResponse(turma);
     }
 
+    /* Função que possui a lógica para atualizar as informações de uma turma */
     public TurmaResponse update(UUID id, TurmaRequest request) {
         Turma turma = turmaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + id + " não encontrada."));
@@ -85,6 +102,7 @@ public class TurmaService {
         return turmaMapper.mappingResponse(turmaRepository.save(turma));
     }
 
+    /* Função que possui a lógica para exclusão de uma turma */
     public void delete(UUID id) {
         Turma turma = turmaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " + id + " não encontrada."));
@@ -93,6 +111,7 @@ public class TurmaService {
             throw new BusinessRuleException("Não é possível deletar a turma, alunos estão matriculados.");
         }
 
+        /* Chama a função para excluir o registro de turma do banco de dados */
         turmaRepository.delete(turma);
     }
 }

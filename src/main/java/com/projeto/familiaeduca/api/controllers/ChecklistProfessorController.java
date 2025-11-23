@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +47,18 @@ public class ChecklistProfessorController {
     public ResponseEntity<ChecklistProfessorResponse> getById(@PathVariable UUID id) {
         ChecklistProfessorResponse checklist = checklistProfessorService.getById(id); /* Chama a função que faz o GET */
         return ResponseEntity.ok(checklist); /* Retorna a checklist */
+    }
+
+    /* Busca o checklist feito pelo professor */
+    @GetMapping("/aluno/{matricula}/hoje")
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR', 'RESPONSAVEL')")
+    public ResponseEntity<ChecklistProfessorResponse> buscarChecklistDeHoje(@PathVariable Integer matricula) {
+        ChecklistProfessorResponse response = checklistProfessorService.buscarPorAlunoEData(matricula, LocalDate.now());
+
+        if (response == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response); /* Retorna a checklist */
     }
 
     /* Endpoint para a atualizar informações de um checklist */

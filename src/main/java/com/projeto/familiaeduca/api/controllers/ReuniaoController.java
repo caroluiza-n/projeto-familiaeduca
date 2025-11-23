@@ -34,7 +34,7 @@ public class ReuniaoController {
 
     /* Endpoint para buscar a lista de todas as reuniões cadastradas */
     @GetMapping
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR')")
     public ResponseEntity<List<ReuniaoResponse>> getAll() {
         List<ReuniaoResponse> reunioes = reuniaoService.getAll(); /* Chama a função que faz o GET */
         return ResponseEntity.ok(reunioes); /* Retorna a lista de reuniões */
@@ -42,6 +42,7 @@ public class ReuniaoController {
 
     /* Endpoint para buscar a reunião pelo id */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR', 'RESPONSAVEL')")
     public ResponseEntity<ReuniaoResponse> getById(@PathVariable UUID id) {
         ReuniaoResponse reuniao = reuniaoService.getById(id); /* Chama a função que faz o GET */
         return ResponseEntity.ok(reuniao); /* Retorna a reunião */
@@ -49,6 +50,7 @@ public class ReuniaoController {
 
     /* Endpoint para buscar as reuniões de um responsável */
     @GetMapping("/responsavel/{idResponsavel}")
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR', 'RESPONSAVEL')")
     public ResponseEntity<List<ReuniaoResponse>> getByResponsavel(@PathVariable UUID idResponsavel) {
         List<ReuniaoResponse> reunioes = reuniaoService.getByResponsavel(idResponsavel);
         return ResponseEntity.ok(reunioes);

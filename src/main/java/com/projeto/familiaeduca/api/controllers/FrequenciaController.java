@@ -44,6 +44,7 @@ public class FrequenciaController {
 
     /* Endpoint para buscar a frequência pelo id */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR')")
     public ResponseEntity<FrequenciaResponse> getById(@PathVariable UUID id) {
         FrequenciaResponse frequencia = frequenciaService.getById(id); /* Chama a função que faz o GET */
         return ResponseEntity.ok(frequencia); /* Retorna a frequência */
