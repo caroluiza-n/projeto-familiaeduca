@@ -39,11 +39,6 @@ public class AlunoService {
 
     /* Função que possui a lógica para criação de um aluno */
     public AlunoResponse create(CreateAlunoRequest request) {
-        /* Vê se a matrícula já está cadastrada no banco de dados */
-        if(alunoRepository.existsById(request.getMatricula())) {
-            throw new DataIntegrityException("A matrícula " + request.getMatricula() + "já está em uso."); /* Lança exceção se estiver cadastrada */
-        }
-
         /* Vê se a turma existe no banco de dados */
         Turma turma = turmaRepository.findById(request.getIdTurma())
                 .orElseThrow(() -> new ResourceNotFoundException("Turma com id " +  request.getIdTurma() + "não encontrada.")); /* Lança exceção se não existir */
@@ -52,9 +47,17 @@ public class AlunoService {
         Responsavel responsavel = responsavelRepository.findById(request.getIdResponsavel())
                 .orElseThrow(() -> new ResourceNotFoundException("Responsável com id " + request.getIdResponsavel() + " não encontrado.")); /* Lança exceção se não existir */
 
+        Integer ultimaMatricula = alunoRepository.encontrarUltimaMatricula();
+        int proximaMatricula = ultimaMatricula + 1;
+
+        /* Vê se a matrícula já está cadastrada no banco de dados
+        if(alunoRepository.existsById(request.getMatricula())) {
+            throw new DataIntegrityException("A matrícula " + request.getMatricula() + "já está em uso."); // Lança exceção se estiver cadastrada
+        }   */
+
         /* Cria o aluno e chama a função que salva no banco de dados */
         Aluno aluno = new Aluno();
-        aluno.setMatricula(request.getMatricula());
+        aluno.setMatricula(proximaMatricula);
         aluno.setNome(request.getNome());
         aluno.setDataNascimento(request.getDataNascimento());
         aluno.setLaudo(request.getLaudo());

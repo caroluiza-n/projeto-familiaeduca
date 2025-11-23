@@ -7,10 +7,12 @@ import com.projeto.familiaeduca.application.requests.CreateResponsavelRequest;
 import com.projeto.familiaeduca.application.requests.UpdateResponsavelRequest;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.domain.models.Responsavel;
+import com.projeto.familiaeduca.application.responses.ResponsavelResumeResponse;
 import com.projeto.familiaeduca.infrastructure.repository.ResponsavelRepository;
 import com.projeto.familiaeduca.infrastructure.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -60,5 +62,12 @@ public class ResponsavelService {
         Responsavel responsavelAtualizado = responsavelRepository.save(responsavel);
 
         return usuarioMapper.mappingResponse(responsavelAtualizado);
+    }
+
+    public List<ResponsavelResumeResponse> getAll() {
+        List<Responsavel> lista = responsavelRepository.findAll();
+        return lista.stream()
+                .map(r -> new ResponsavelResumeResponse(r.getId(), r.getNome(), r.getEmail()))
+                .toList();
     }
 }

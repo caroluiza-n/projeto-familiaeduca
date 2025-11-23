@@ -30,7 +30,7 @@ public class TurmaController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('DIRETOR')")
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR')")
     public ResponseEntity<List<TurmaResumeResponse>> getAll() {
         return ResponseEntity.ok(turmaService.getAll());
     }

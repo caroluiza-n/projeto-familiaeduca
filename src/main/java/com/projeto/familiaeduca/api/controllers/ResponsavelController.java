@@ -4,10 +4,13 @@ import com.projeto.familiaeduca.application.requests.CreateResponsavelRequest;
 import com.projeto.familiaeduca.application.requests.UpdateResponsavelRequest;
 import com.projeto.familiaeduca.application.responses.UsuarioResponse;
 import com.projeto.familiaeduca.application.services.ResponsavelService;
+import com.projeto.familiaeduca.application.responses.ResponsavelResumeResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -23,6 +26,12 @@ public class ResponsavelController {
     @PostMapping
     public ResponseEntity<UsuarioResponse> create(@Valid @RequestBody CreateResponsavelRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(responsavelService.create(request));
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR')")
+    public ResponseEntity<List<ResponsavelResumeResponse>> getAll() {
+        return ResponseEntity.ok(responsavelService.getAll());
     }
 
     @PutMapping("/{id}")
