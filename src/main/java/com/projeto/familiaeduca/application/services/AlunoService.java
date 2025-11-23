@@ -7,12 +7,21 @@ import com.projeto.familiaeduca.application.requests.CreateAlunoRequest;
 import com.projeto.familiaeduca.application.requests.UpdateAlunoRequest;
 import com.projeto.familiaeduca.application.responses.AlunoResponse;
 import com.projeto.familiaeduca.domain.models.Aluno;
+import com.projeto.familiaeduca.domain.models.Boletim;
+import com.projeto.familiaeduca.domain.models.Diretor;
 import com.projeto.familiaeduca.domain.models.Responsavel;
 import com.projeto.familiaeduca.domain.models.Turma;
+import com.projeto.familiaeduca.domain.models.Usuario;
 import com.projeto.familiaeduca.infrastructure.repository.AlunoRepository;
+import com.projeto.familiaeduca.infrastructure.repository.BoletimRepository;
+import com.projeto.familiaeduca.infrastructure.repository.DiretorRepository;
 import com.projeto.familiaeduca.infrastructure.repository.ResponsavelRepository;
 import com.projeto.familiaeduca.infrastructure.repository.TurmaRepository;
+import com.projeto.familiaeduca.infrastructure.repository.UsuarioRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +34,27 @@ public class AlunoService {
     private final ResponsavelRepository responsavelRepository;
     private final AlunoMapper alunoMapper;
 
+    /* Dependencias para criar o boletim do aluno */
+    private final BoletimRepository boletimRepository;
+    private final DiretorRepository diretorRepository;
+    private final UsuarioRepository usuarioRepository;
+
     public AlunoService(
             AlunoRepository alunoRepository,
             TurmaRepository turmaRepository,
             ResponsavelRepository responsavelRepository,
-            AlunoMapper alunoMapper
+            AlunoMapper alunoMapper,
+            BoletimRepository boletimRepository,
+            DiretorRepository diretorRepository,
+            UsuarioRepository usuarioRepository
     ) {
         this.alunoRepository = alunoRepository;
         this.turmaRepository = turmaRepository;
         this.responsavelRepository = responsavelRepository;
         this.alunoMapper = alunoMapper;
+        this.boletimRepository = boletimRepository;
+        this.diretorRepository = diretorRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     /* Função que possui a lógica para criação de um aluno */
@@ -66,12 +86,58 @@ public class AlunoService {
         aluno.setResponsavel(responsavel);
 
         Aluno novoAluno = alunoRepository.save(aluno);
+        // Gera boletim para o Aluno
+        gerarBoletinsParaAluno(novoAluno);
+
         return alunoMapper.mappingResponse(novoAluno);
+    }
+
+    // Função para criar o boletim para o aluno no momento da matricula
+    private void gerarBoletinsParaAluno(Aluno aluno) {
+        // Pega o e-mail do Diretor logado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String emailDiretor = auth.getName();
+
+        // Busca o usuário e depois o objeto Diretor
+        Usuario usuario = usuarioRepository.findByEmail(emailDiretor)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário logado não encontrado."));
+
+        Diretor diretor = diretorRepository.findById(usuario.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Apenas Diretores podem matricular. Diretor não encontrado no sistema."));
+
+        // Cria 4 boletins (1 por bimestre) para o ano atual
+        for (int i = 1; i <= 4; i++) {
+            Boletim b = new Boletim();
+            b.setAluno(aluno);
+            b.setDiretor(diretor);
+            b.setAno(Year.now());
+            b.setBimestre(i + "º Bimestre");
+            b.setObservacoes("Boletim gerado automaticamente na matrícula.");
+
+            boletimRepository.save(b);
+        }
     }
 
     /* Função que possui a lógica para retornar a lista com todos os alunos cadastrados */
     public List<AlunoResponse> getAll() {
-        return alunoRepository.findAll().stream()
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String emailLogado = auth.getName();
+        String permissoes = auth.getAuthorities().toString();
+
+        List<Aluno> lista;
+
+        // Decide qual busca fazer
+        if (permissoes.contains("RESPONSAVEL")) {
+            // Se for responsavel, busca SÓ os filhos dele
+            lista = alunoRepository.findByResponsavelEmail(emailLogado);
+        } else {
+            // Se for Diretor ou Professor, busca TODOS
+            lista = alunoRepository.findAll();
+        }
+
+        // 3. Converte e retorna
+        return lista.stream()
                 .map(alunoMapper::mappingResponse)
                 .collect(Collectors.toList());
     }

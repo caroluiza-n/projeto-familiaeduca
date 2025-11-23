@@ -49,9 +49,9 @@ public class ReuniaoController {
 
     /* Endpoint para buscar as reuniões de um responsável */
     @GetMapping("/responsavel/{idResponsavel}")
-    public ResponseEntity<List<ReuniaoResponse>> getByResponsavel(@PathVariable UUID responsavelId) {
-        List<ReuniaoResponse> reunioes = reuniaoService.getByResponsavel(responsavelId); /* Chama a função que faz o GET */
-        return ResponseEntity.ok(reunioes); /* Retorna a lista de reuniões do responsável */
+    public ResponseEntity<List<ReuniaoResponse>> getByResponsavel(@PathVariable UUID idResponsavel) {
+        List<ReuniaoResponse> reunioes = reuniaoService.getByResponsavel(idResponsavel);
+        return ResponseEntity.ok(reunioes);
     }
 
     /* Endpoint para a atualizar informações de uma reunião */

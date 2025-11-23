@@ -33,7 +33,7 @@ public class AlunoController {
 
     /* Endpoint para buscar a lista de todos os alunos cadastrados */
     @GetMapping
-    @PreAuthorize("hasRole('DIRETOR')") /* Quem pode fazer é o diretor */
+    @PreAuthorize("hasAnyRole('DIRETOR', 'PROFESSOR', 'RESPONSAVEL')")/* Quem pode fazer é o diretor */
     public ResponseEntity<List<AlunoResponse>> getAll() {
         List<AlunoResponse> alunos = alunoService.getAll(); /* Chama a função que faz o GET */
         return ResponseEntity.ok(alunos); /* Retorna a lista de alunos */
